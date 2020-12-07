@@ -1,6 +1,6 @@
-import constants from "../constants/employeesConstant";
+import constants from '../constants/employeesConstant';
 
-export const employeesReducer = (state = [], { type, payload }) => {
+const employeesReducer = (state = [], { type, payload }) => {
   switch (type) {
     case constants.EMPLOYEES_SUCCESS:
       return payload;
@@ -8,4 +8,7 @@ export const employeesReducer = (state = [], { type, payload }) => {
     default:
       return state;
   }
+};
+export default {
+  employeesReducer,
 };

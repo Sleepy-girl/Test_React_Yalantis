@@ -1,35 +1,76 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import EmployeesPage from "./EmployeesPage";
-import operation from "../redux/operations/employeesOpearstions";
+import React, { useState, useEffect, useCallback } from 'react';
+// import { useDispatch } from 'react-redux';
+import { EmployeesStyled } from './EmployyesStyled';
+import { arr_EN, months } from './arrayEng';
+import EmployeesPage from './EmployeesPage';
+// import operation from '../redux/operations/employeesOpearstions';
+// import action from '../redux/actions/employeesActions';
 
 function HomePage() {
-  const [state, setState] = useState([]);
-  const dispatch = useDispatch();
-  const getArray = useSelector((state) => state.employees);
+  const [employees, setEmployees] = useState([]);
+  const [isShowDob, setShowDob] = useState(false);
+  // const dispatch = useDispatch();
+  // const getArray = useSelector(state => state.employees);
 
-  // const getEmployees = useCallback(async () => {
-  //   const result = await dispatch(operation.getEmployeesOperation());
-  //   console.log("result", result);
-  //   // setState([...result]);
-  //   // console.log(state);
-  //   // return result;
-  // }, [dispatch]);
-  // const employeesArray = [...state.employees];
+  const fetchEmployees = useCallback(() => {
+    fetch(`https://yalantis-react-school-api.yalantis.com/api/task0/users`)
+      .then(result => result.json())
+      .then(result => {
+        console.log(result);
+        // dispatch(action.emloyeesSuccess([...result]));
+        setEmployees(result);
+      });
+  }, [setEmployees]);
 
-  // useEffect(() => getEmployees(), [getEmployees]);
+  useEffect(() => {
+    fetchEmployees();
+  }, [fetchEmployees]);
+
+  const handleChange = e => {
+    setShowDob(prevState => !prevState);
+  };
 
   return (
-    <>
-      {/* <ul>
-        {employeesArray.map((item) => (
-          <li key={item.id}>{item.lastName}</li>
-        ))}
-      </ul> */}
-      {console.log("getArray", getArray)}
-      {/* {getEmployees()} */}
-      <EmployeesPage />
-    </>
+    <EmployeesStyled>
+      <div className="employessWrapper">
+        <h2>Employees</h2>
+        <ul>
+          {arr_EN.map(symbol => (
+            <li key={symbol}>
+              <h3>{symbol}</h3>
+              <ul>
+                {employees.map(item => {
+                  if (item.lastName.split('')[0] === symbol) {
+                    return (
+                      <li key={item.id}>
+                        {item.lastName} {item.firstName}
+                        <input
+                          type="checkbox"
+                          name={item.id}
+                          value={item.id}
+                          onChange={handleChange}
+                        />
+                      </li>
+                    );
+                  }
+                })}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="employeesBirthdayWrapper">
+        <h2>Employees Birthday</h2>
+        <ul>
+          {months.map((month, idx) => (
+            <li key={idx}>
+              <h3>{month}</h3>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* <EmployeesPage />  */}
+    </EmployeesStyled>
   );
 }
 

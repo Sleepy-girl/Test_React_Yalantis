@@ -1,6 +1,6 @@
-const EMPLOYEES_REQUEST = "employees/employeesRequest";
-const EMPLOYEES_SUCCESS = "employees/employeesSuccess";
-const EMPLOYEES_ERROR = "employees/employeesError";
+export const EMPLOYEES_REQUEST = 'employees/employeesRequest';
+export const EMPLOYEES_SUCCESS = 'employees/employeesSuccess';
+export const EMPLOYEES_ERROR = 'employees/employeesError';
 
 export default {
   EMPLOYEES_REQUEST,
