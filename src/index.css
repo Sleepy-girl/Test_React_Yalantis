@@ -18,7 +18,9 @@ code {
   padding: 0;
   box-sizing: inherit;
 }
-
+body {
+  padding: 30px;
+}
 html {
   box-sizing: border-box;
 }
@@ -26,7 +28,8 @@ html {
 ul,
 ol {
   list-style: none;
-  /* font-size: 0; */
+  font-size: 12px;
+  padding: 20px;
 }
 
 a {
@@ -39,4 +42,13 @@ img {
   height: auto;
   margin: 0;
   padding: 0;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgb(56, 56, 56);
+}
+h3 {
+  font-size: 14px;
 }

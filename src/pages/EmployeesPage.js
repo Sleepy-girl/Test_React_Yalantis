@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
+import Employees from '../components/employees/Employees';
 
 function EmployeesPage() {
   return (
     <>
-      <h2>список работничков</h2>
+      <Employees />
     </>
   );
 }
