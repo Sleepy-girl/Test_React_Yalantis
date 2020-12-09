@@ -56,14 +56,16 @@ function Employees() {
               ).length ? (
                 <h3>{symbol}</h3>
               ) : (
-                <h3>{symbol} --- </h3>
+                <h3>{symbol} ------ </h3>
               )}
               <ul>
                 {employees.map(
                   item =>
                     item.lastName.slice(0, 1) === symbol && (
                       <li key={item.id}>
-                        {item.lastName} {item.firstName}
+                        <span>
+                          {item.lastName} {item.firstName}
+                        </span>
                         <input
                           type="checkbox"
                           name={item.id}
@@ -80,7 +82,7 @@ function Employees() {
       </div>
       <div className="employeesBirthdayWrapper">
         <h2>Employees Birthday</h2>
-        <ul>
+        <ul className="birthdayList">
           {months.map((month, idx) => {
             return (
               <li key={month}>
@@ -99,13 +101,17 @@ function Employees() {
                         .map(employee => (
                           <li key={employee.id}>
                             <span>
-                              {employee.lastName} {employee.firstName} -
-                              {`${new Date(employee.dob).getDay()}`.padStart(
+                              {`${employee.lastName} ${
+                                employee.firstName
+                              } - ${`${new Date(
+                                employee.dob,
+                              ).getDate()}`.padStart(
                                 2,
                                 '0',
-                              )}{' '}
-                              {month}, {new Date(employee.dob).getFullYear()}{' '}
-                              year
+                              )} ${month}, ${new Date(
+                                employee.dob,
+                              ).getFullYear()}
+                              year`}
                             </span>
                           </li>
                         ))}

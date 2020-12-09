@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const EmployeesStyled = styled.div`
-  padding: 30px;
-  list-style: none;
   display: flex;
   justify-content: space-evenly;
+  list-style: none;
+  padding: 30px;
 
-  .employeesBirthdayWrapper {
-    font-size: 14px;
-    color: black;
+  li {
+    display: flex;
+    justify-content: space-between;
+    width: 130px;
   }
 `;
