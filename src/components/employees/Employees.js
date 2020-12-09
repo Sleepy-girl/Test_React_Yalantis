@@ -10,13 +10,13 @@ function Employees() {
       .then(result => result.json())
       .then(result => {
         setEmployees(
-          result.map(employe => {
+          result.map(employee => {
             if (localStorage.getItem('employees')) {
               const localData = JSON.parse(localStorage.getItem('employees'));
-              return localData.filter(elem => elem.id === employe.id).length
-                ? { ...employe, checked: true }
-                : { ...employe, checked: false };
-            } else return { ...employe, checked: false };
+              return localData.filter(elem => elem.id === employee.id).length
+                ? { ...employee, checked: true }
+                : { ...employee, checked: false };
+            } else return { ...employee, checked: false };
           }),
         );
       });
@@ -24,10 +24,10 @@ function Employees() {
 
   const onHandleCheck = e => {
     setEmployees(prevState => [
-      ...prevState.map(employe =>
-        employe.id === e.target.name
-          ? { ...employe, checked: !employe.checked }
-          : employe,
+      ...prevState.map(employee =>
+        employee.id === e.target.name
+          ? { ...employee, checked: !employee.checked }
+          : employee,
       ),
     ]);
   };
@@ -40,19 +40,19 @@ function Employees() {
     employees.length &&
       localStorage.setItem(
         'employees',
-        JSON.stringify(employees.filter(employe => employe.checked)),
+        JSON.stringify(employees.filter(employee => employee.checked)),
       );
   }, [employees]);
 
   return (
     <EmployeesStyled>
-      <div className="employessWrapper">
+      <div className="employeessWrapper">
         <h2>Employees</h2>
         <ul>
           {arr_EN.map(symbol => (
             <li key={symbol}>
               {employees.filter(
-                employe => employe.lastName.slice(0, 1) === symbol,
+                employee => employee.lastName.slice(0, 1) === symbol,
               ).length ? (
                 <h3>{symbol}</h3>
               ) : (
@@ -96,15 +96,15 @@ function Employees() {
                             new Date(item.dob).getMonth() === idx &&
                             item.checked,
                         )
-                        .map(employe => (
-                          <li key={employe.id}>
+                        .map(employee => (
+                          <li key={employee.id}>
                             <span>
-                              {employe.lastName} {employe.firstName} -
-                              {`${new Date(employe.dob).getDay()}`.padStart(
+                              {employee.lastName} {employee.firstName} -
+                              {`${new Date(employee.dob).getDay()}`.padStart(
                                 2,
                                 '0',
                               )}{' '}
-                              {month}, {new Date(employe.dob).getFullYear()}{' '}
+                              {month}, {new Date(employee.dob).getFullYear()}{' '}
                               year
                             </span>
                           </li>
